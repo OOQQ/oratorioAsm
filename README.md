@@ -1,2 +1,2 @@
 A ZX Spectrum 48k game about a guy killing things.
-In sweet Z80 asm.
+This is the Z80 asm version.
