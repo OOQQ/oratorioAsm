@@ -1,8 +1,8 @@
-	DEVICE ZXSPECTRUM48
+		DEVICE ZXSPECTRUM48
 		org $8000								;code origin
-start:
 
-		ld hl, message					;address of string
+start:
+		ld hl, string						;address of string
 		call printString				;show string to the screen
 		ret
 
@@ -16,7 +16,7 @@ printChar:
 		push de
 		push af
 				ld a, 2							;select stream 2 = topscreen
-				call $1601					;chan_open
+				call $1601					;ROM CHAN_OPEN
 		pop af
 		push af
 				rst 16							;call &0010 print_a_1
@@ -27,14 +27,14 @@ printChar:
 		ret
 
 printString:
-		ld a, (hl)							;print a 255 terminated string
-		cp 255
+		ld a, (hl)							;print a 0 terminated string
+		cp 0
 		ret z
 		inc hl
 		call printChar
 		jr printString
 
-message: db "hello world", 255
+string: db "Hello World!", 0
 
-	SAVETAP "../release/tape.tap", start	;save tape file to file game.tap
-					;start address is START ($8000)
+		SAVETAP "../release/tape.tap", start
+														;save tape file, start address $8000
