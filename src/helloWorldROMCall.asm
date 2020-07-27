@@ -37,4 +37,4 @@ printString:
 string: db "Hello World!", 0
 
 		SAVETAP "../release/tape.tap", start
-														;save tape file, start address $8000
+														;save tape file, autolaunch start address is $8000
